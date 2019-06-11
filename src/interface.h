@@ -4,8 +4,8 @@
  *
  * Created on 8 de Maio de 2019, 22:35
  */
-#ifndef INTERFACE_H
-#define INTERFACE_H
+#ifndef __INTERFACE_H
+#define __INTERFACE_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,13 +16,13 @@ extern "C" {
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
-#define DEBUG_INTERFACE
+//#define DEBUG_INTERFACE
     //----------------------------------------------------------   
-#define READ_RETURN_FORMAT "%s:%s"
+#define READ_RETURN_FORMAT "%s/%s"
 #define MSG "READ_RETURN_FORMAT: " READ_RETURN_FORMAT
 #pragma message(MSG)
 
-#define WRITE_RETURN_FORMAT "%s:{\"ok\":%s}"
+#define WRITE_RETURN_FORMAT "%s/{\"ok\":%s}"
 #define MSG2 "WRITE_RETURN_FORMAT: " WRITE_RETURN_FORMAT
 #pragma message(MSG2)
 

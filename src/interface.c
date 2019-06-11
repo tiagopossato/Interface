@@ -1,4 +1,5 @@
 #include "interface.h"
+//#include <avr/pgmspace.h>
 
 void execute(char *entrada);
 
@@ -10,34 +11,6 @@ void beginInterface() {
 }
 
 uint8_t registerResource(Resource *node, const char *uri, GetValue _getValue, SetValue _setValue, uint8_t options) {
-    //    if (_getValue == NULL) {
-    //        if (options != ACCESS_TYPE_FW && options != ACCESS_TYPE_UW_MW) {
-    //#ifdef DEBUG_INTERFACE
-    //            printf("getValue não definido para %s. Recurso não registrado!\n", uri);
-    //#endif
-    //            return false;
-    //        }
-    //    }
-    //
-    //    if (_setValue == NULL &&
-    //            (options == ACCESS_TYPE_UR_MRW ||
-    //            options == ACCESS_TYPE_FR_URW_MRW ||
-    //            options == ACCESS_TYPE_MRW ||
-    //            options == ACCESS_TYPE_UR_MRW ||
-    //            options == ACCESS_TYPE_URW_MRW)) {
-    //#ifdef DEBUG_INTERFACE
-    //        printf("setValue não definido para %s. Recurso não registrado!\n", uri);
-    //#endif
-    //        return false;
-    //    }
-    //
-    //    if (options >= ACCESS_TYPE_SIZE) {
-    //#ifdef DEBUG_INTERFACE
-    //        printf("Tipo de acesso %d inválido para %s. Recurso não registrado!\n", (int) options, uri);
-    //#endif
-    //        return false;
-    //    }
-
     node->getValue = _getValue;
     node->setValue = _setValue;
 
@@ -66,7 +39,9 @@ Resource * getResource(char *uri) {
     //Percorre toda a lista, buscando o recurso desejado
     Resource *rsc = INTERFACE.head;
     while (rsc != NULL) {
-        if (strcmp(rsc->uri, uri) == 0) {
+	//http://www.nongnu.org/avr-libc/user-manual/group__avr__pgmspace.html#gab0c75b8cce460448b747c29231da847c
+	//The strcmp_P() function is similar to strcmp() except that s2 is pointer to a string in program space.
+        if (strcmp(uri, rsc->uri) == 0) {
             break;
         }
         rsc = rsc->prox;
